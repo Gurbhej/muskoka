@@ -70,22 +70,7 @@ router.get('/staff-payment', function(req, res, next){
 router.get('/staff-camper-registration', function(req, res, next){
   res.render('staff-camper-registration', { title:'Camper Registration'});
 });
-router.get('/staff-addaday', function(req, res, next){
-  res.render('staff-addaday', { title:'New Camp'});
-});
-router.get('/staff-login', function(req, res, next) {
 
-  let messages = req.session.messages || [];
-
-  // clear messages from session
-  req.session.messages = [];
-
-  res.render('staff-login', {
-    title: 'Please Login',
-    messages: messages,
-      user: null
-  });
-});
 /* POST staff register */
 router.post('/staff-register', function(req, res, next) {
   //use the accountStaff model to create a new staff member with passport
@@ -95,7 +80,7 @@ router.post('/staff-register', function(req, res, next) {
        console.log(err);
        res.redirect('error', { title: 'Create Account Error'});
      }
-   res.redirect('/staff-login');
+     // res.redirect('/staff-login');
   });
 });
 
@@ -103,14 +88,7 @@ router.post('/staff-register', function(req, res, next) {
 router.post('/staff-login', passport.authenticate('local', {
   successRedirect: '/staff-dashboard',
     failureRedirect: '/staff-login',
-      failureMessage: 'Invalid Login'
+    failureMessage: 'Invalid Login'
 }));
-
-//GET Logout handler
-router.get('/staff-logout', function(req,res, next ){
-  req.logout();
-  res.redirect('/');
-})
-
 
 module.exports = router;
