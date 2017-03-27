@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 // add the controller
 var campers = require('./routes/campers');
+var camps = require('./routes/camps');
 
 var app = express();
 
@@ -64,6 +65,7 @@ app.use('/', index);
 app.use('/users', users);
 //use campers controller
 app.use('/', campers);
+app.use('/', camps);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
